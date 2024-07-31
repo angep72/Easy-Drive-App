@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+{% block content %}
+&nbsp;
+{% include "./navbar.html" %}
+{% include 'messages.html'%}
+
+<div class="bg-gray-100 dark:bg-gray-900">
+  <div class="container mx-auto my-5 p-5">
+    <div class="md:flex no-wrap md:-mx-2">
+      <!-- Personal Information Section -->
+      <div class="w-full md:w-3/12 md:mx-2">
+        <div class="bg-white dark:bg-gray-800 p-3 border-t-4 border-green-400">
+          <div class="image overflow-hidden">
+            <img
+              class="h-auto w-48 mx-auto rounded-full"
+              src="{% if driver_profile %}{{ driver_profile.avatar.url }}{% else %}{{ company_profile.avatar.url }}{% endif %}"
+              alt="Profile Picture"
+            />
+          </div>
+          <h1
+            class="text-gray-900 dark:text-gray-100 font-bold text-xl leading-8 my-1"
+          >
+            {{ request.user.first_name }} {{ request.user.last_name }}
+          </h1>
+          <h3
+            class="text-gray-600 dark:text-gray-300 font-lg text-semibold leading-6"
+          >
+            {{ request.user.email }}
+          </h3>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="w-full md:w-9/12 mx-2 h-64">
+        {% if driver_profile %}
+        <!-- Driver Profile Form -->
+        <div class="bg-white dark:bg-gray-800 p-3 shadow-sm rounded-sm">
+          <div
+            class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-gray-100 leading-8"
+          >
+            <span class="tracking-wide">Driver Profile Information</span>
+          </div>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid md:grid-cols-2 gap-4">
+              <!-- Driver Profile Fields -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">First Name</label>
+                <input type="text" name="first_name" value="{{ request.user.first_name }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Last Name</label>
+                <input type="text" name="last_name" value="{{ request.user.last_name }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                <input type="email" name="email" value="{{ request.user.email }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Avatar</label>
+                <input type="file" name="avatar" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
+                <input type="text" name="category" value="{{ driver_profile.category }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bio</label>
+                <textarea name="bio" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100">{{ driver_profile.bio }}</textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
+                <select name="status" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                  <option value="AVAILABLE" {% if driver_profile.status == 'AVAILABLE' %}selected{% endif %}>Available</option>
+                  <option value="UNAVAILABLE" {% if driver_profile.status == 'UNAVAILABLE' %}selected{% endif %}>Unavailable</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Experience (years)</label>
+                <input type="number" name="experience_years" value="{{ driver_profile.experience }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">License Number</label>
+                <input type="text" name="license_number" value="{{ driver_profile.license_number }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">License Type</label>
+                <input type="text" name="license_type" value="{{ driver_profile.license_type }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">License Expiration</label>
+                <input type="date" name="license_expiration" value="{{ driver_profile.license_expiration|date:'Y-m-d' }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Salary</label>
+                <input type="number" name="salary" step="0.01" value="{{ driver_profile.salary }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Rating</label>
+                <input type="number" name="rating" step="0.1" value="{{ driver_profile.rating }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+            </div>
+            <div class="mt-4">
+              <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">Save</button>
+            </div>
+          </form>
+        </div>
+        {% else %}
+        <!-- Company Profile Form -->
+        <div class="bg-white dark:bg-gray-800 p-3 shadow-sm rounded-sm">
+          <div
+            class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-gray-100 leading-8"
+          >
+            <span class="tracking-wide">Company Profile Information</span>
+          </div>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid md:grid-cols-2 gap-4">
+              <!-- Company Profile Fields -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">First Name</label>
+                <input type="text" name="first_name" value="{{ request.user.first_name }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Last Name</label>
+                <input type="text" name="last_name" value="{{ request.user.last_name }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                <input type="email" name="email" value="{{ request.user.email }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Avatar</label>
+                <input type="file" name="avatar" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Company Name</label>
+                <input type="text" name="company_name" value="{{ company_profile.company_name }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bio</label>
+                <textarea name="bio" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100">{{ company_profile.bio }}</textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Location</label>
+                <input type="text" name="location" value="{{ company_profile.location }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Website</label>
+                <input type="url" name="website" value="{{ company_profile.website }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Industry</label>
+                <input type="text" name="industry" value="{{ company_profile.industry }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Founded Year</label>
+                <input type="number" name="founded_year" value="{{ company_profile.founded_year }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+            </div>
+            <div class="mt-4">
+              <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">Save</button>
+            </div>
+          </form>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if driver_profile %}
+<!-- Jobs Applied to Table -->
+<div class="bg-white dark:bg-gray-800 p-3 ml-6 mt-5 shadow-sm rounded-sm">
+  <div class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-gray-100 leading-8 ml-6">
+    <span class="tracking-wide">Jobs Applied To</span>
+  </div>
+  <table class="min-w-full leading-normal">
+    <thead>
+      <tr>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Job Title</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Application Date</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Motivation Letter</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for application in applications %}
+      <tr class="dark:text-white text-black">
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.job.title }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.application_date }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.status }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.motivation_letter|slice:":100" }}{% if application.motivation_letter|length > 100 %}...{% endif %}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="px-5 py-5 border-b border-gray-200 dark:border-gray-700 text-center">No applications found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% elif company_profile %}
+<!-- Jobs Created Table -->
+<div class="bg-white dark:bg-gray-800 p-3 mt-5  shadow-sm rounded-sm">
+  <div class="flex items-center space-x-2  font-semibold text-gray-900 dark:text-gray-100 leading-8">
+    <span class="tracking-wide">Jobs Created</span>
+  </div>
+  <table class="min-w-full leading-normal">
+    <thead>
+      <tr>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Job Title</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Location</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Type</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Created At</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for job in jobs_created %}
+      <tr class="text-dark dark:text-white">
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.title }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.location }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.get_type_display }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.get_status_display }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.created_at }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">
+          <!-- Update Status Form -->
+          <form method="POST" action="{% url 'update_job_status' job.id %}" class="inline">
+            {% csrf_token %}
+            <select name="status" class="rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+              <option value="OPEN" {% if job.status == 'OPEN' %}selected{% endif %}>Open</option>
+              <option value="CLOSED" {% if job.status == 'CLOSED' %}selected{% endif %}>Closed</option>
+              <!-- Add more statuses if needed -->
+            </select>
+            <br>
+            <button type="submit" class="px-2 py-1 bg-blue-500 text-white rounded-md">Update Status</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" class="px-5 py-5 border-b border-gray-200 dark:border-gray-700 text-center">No jobs created yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}

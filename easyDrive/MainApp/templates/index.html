@@ -1,0 +1,201 @@
+{% extends 'base.html'%}
+<br />
+{% load static%} {% block content%} {% include 'navbar.html'%}
+<section class="bg-white dark:bg-gray-900">
+  <div
+    class="grid max-w-screen-xl px-4 py-12 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
+  >
+    <div class="mr-auto place-self-center lg:col-span-7">
+      <h1
+        class="max-w-2xl mb-4 pt-20 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"
+      >
+        Discover Your Ideal Driving Job in Rwanda
+      </h1>
+      <p
+        class="max-w-2xl pt-10 pb-10 mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
+      >
+        Easy Drive is your ultimate solution for landing solution the perfect
+        driving job in Rwanda. Don’t wait embark on your journey to success
+        today with Easy Drive!
+      </p>
+      <button
+        href="#"
+        class="ml-10 bg-blue-700 w- text-white flex hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >
+        Get Started
+        <svg
+          class="w-5 h-5 ml-2 -mr-1"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+      <img src="{% static 'img/car1.png' %}" alt="mockup" />
+    </div>
+  </div>
+</section>
+
+<!-- about section starts here  -->
+<section class="bg-white dark:bg-gray-900 pt-20" id="about">
+  <div
+    class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6"
+  >
+    <img
+      class="w-full"
+      src="{% static 'img/car2.png'%}"
+      alt="dashboard image"
+    />
+    <div class="mt-4 md:mt-0">
+      <h2
+        class="mb-4 text-4xl pb-4 tracking-tight font-extrabold text-gray-900 dark:text-white"
+      >
+        About easyDrive
+      </h2>
+      <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+        Easy Drive introduces a special employment platform dedicated to
+        individual with driver’s licenses. Unlike existing solution. Our
+        platform is uniquely tailored to connect drivers with job opport unities
+        that match their skills and qualifications. Our mission is to streamline
+        the job search process for drivers, making it easier than ever than ever
+        to find suitable employment in Rwanda. We understand the challenges
+        drivers face in finding the right job.
+      </p>
+      <button
+        class="ml-10 bg-blue-700 text-white flex hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >
+        Get Started
+        <svg
+          class="w-5 h-5 ml-2 -mr-1"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white dark:bg-gray-900">
+  <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
+    <figure class="max-w-screen-md mx-auto">
+      <svg
+        class="h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600"
+        viewBox="0 0 24 27"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+          fill="currentColor"
+        />
+      </svg>
+      <blockquote>
+        <p class="text-2xl font-medium text-gray-900 dark:text-white">
+          " Easy Drive introduces a special employment platform dedicated to
+          individual with driver’s licenses. Unlike existing solution."
+        </p>
+      </blockquote>
+      <figcaption class="flex items-center justify-center mt-6 space-x-3">
+        <img
+          class="w-6 h-6 rounded-full"
+          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
+          alt="profile picture"
+        />
+        <div
+          class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700"
+        >
+          <div class="pr-3 font-medium text-gray-900 dark:text-white">
+            Anonymous User
+          </div>
+          <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">
+            CEO at Unknown Tech
+          </div>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- contact form -->
+<section class="bg-white dark:bg-gray-900" id="contact">
+  <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+    <h2
+      class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white"
+    >
+      Contact Us
+    </h2>
+    <p
+      class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl"
+    >
+      Want to know more about us? Let us know.
+    </p>
+    <form class="space-y-8" method="POST">
+      {% include 'messages.html'%} {% csrf_token %}
+      <div>
+        <label
+          for="email"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Your email</label
+        >
+        <input
+          type="email"
+          id="email"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+          placeholder="easydrive@mail.com"
+          required
+        />
+      </div>
+      <div>
+        <label
+          for="subject"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Subject</label
+        >
+        <input
+          type="text"
+          id="subject"
+          class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+          placeholder="Let us know how we can help you"
+          required
+        />
+      </div>
+      <div class="sm:col-span-2">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+          >Your message</label
+        >
+        <textarea
+          id="message"
+          rows="6"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          placeholder="Leave a comment..."
+        ></textarea>
+      </div>
+      <button
+        class="ml-10 bg-blue-700 text-white flex hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >
+        Send Message
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- footer section  -->
+{% include 'footer.html'%}
+<br />
+{% endblock %}
